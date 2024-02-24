@@ -5,8 +5,13 @@
 package main;
 
 /**
- *
- * @author Estudiantes
+ * @author
+ ** Miguel Angel Naranjo Joya
+ ** Laura Andrea Riobueno Rincon
+ ** Cristian Camilo Tuso Mozo
+ * 
+ * @version 1.0 23/02/2024
+ * 
  */
 public class TallerMetricas {
 

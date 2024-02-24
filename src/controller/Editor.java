@@ -4,6 +4,11 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import model.Empleado;
+import model.Instructor;
+import model.Monitor;
+
 /**
  * @author
  ** Miguel Angel Naranjo Joya
@@ -15,4 +20,6 @@ package controller;
  */
 public class Editor {
     
+    ArrayList<Monitor> listaMonitores = new ArrayList();
+    ArrayList<Instructor> listaInstructor = new ArrayList();
 }

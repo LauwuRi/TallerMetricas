@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  * @author
  ** Miguel Angel Naranjo Joya
@@ -13,6 +15,10 @@ package model;
  * @version 1.0 23/02/2024
  * 
  */
-public class Monitor {
+public class Monitor extends Empleado{
+    
+    public Monitor(String cedula, String nombre, String telefono, Date fechaNacimiento, String direccion, String correo) {
+        super(cedula, nombre, telefono, fechaNacimiento, direccion, correo);
+    }
     
 }
