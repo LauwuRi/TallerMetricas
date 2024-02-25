@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-import java.util.Date;
 
 /**
  * @author
@@ -17,7 +12,7 @@ import java.util.Date;
  */
 public class Monitor extends Empleado{
     
-    public Monitor(String cedula, String nombre, String telefono, Date fechaNacimiento, String direccion, String correo) {
+    public Monitor(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) {
         super(cedula, nombre, telefono, fechaNacimiento, direccion, correo);
     }
     public Monitor(){

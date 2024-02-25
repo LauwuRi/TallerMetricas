@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.VentanaInicial;
 import view.VentanaPrincipal;
 import model.Empleado;
@@ -31,14 +27,10 @@ import model.Monitor;
 public class Editor implements ActionListener{
     
 
-     private VentanaInicial wdInicial;
+    private VentanaInicial wdInicial;
     private VentanaPrincipal wdPrincipal;
-    private Scanner scanner;
-    private int id;
     private String rol;
-
     public Editor(VentanaInicial ventana, VentanaPrincipal ventanaDatos) {
-        scanner = new Scanner(System.in);
         this.wdInicial = ventana;
         this.wdPrincipal = ventanaDatos;
         inicializadorBotones();
@@ -54,16 +46,95 @@ public class Editor implements ActionListener{
         this.wdPrincipal.jbtnModificar.addActionListener((ActionListener) this);
         this.wdPrincipal.jBTNBack.addActionListener((ActionListener) this);
         this.wdPrincipal.jBTNMostrar.addActionListener((ActionListener) this);
+        this.wdPrincipal.jTFNombre.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				char d;
+				d = Character.toLowerCase(c);
+				if ((d < 'a' || d > 'z')) {
+					if (d == ' ') {// Se consume sino son letras
+					} else {
+						e.consume();
+					}
+
+				}
+
+			}
+		});
+        this.wdPrincipal.jTFTelefono.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if ((c < '0' || c > '9')) {// Se consume sino son números
+					e.consume();
+				} else {
+					if (wdPrincipal.jTFTelefono.getText().length() > 9) {// Se limita el numero de caracteres
+						e.consume();
+					}
+				}
+
+
+			}
+		}
+        
+        );
+         this.wdPrincipal.jTFCedula.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if ((c < '0' || c > '9')) {// Se consume sino son números
+					e.consume();
+				} else {
+					if (wdPrincipal.jTFCedula.getText().length() > 9) {// Se limita el numero de caracteres
+						e.consume();
+					}
+				}
+
+
+			}
+		});
+          this.wdPrincipal.jTFFechaNacimiento.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if ((c < '0' || c > '9')&&(c!='/')) {// Se consume sino son números o /
+					e.consume();
+				} else {
+					if (wdPrincipal.jTFFechaNacimiento.getText().length() > 9) {// Se limita el numero de caracteres
+						e.consume();
+					}
+				}
+
+
+			}
+		});
+        
     }
-    private void crearEmpleado(){
+    
+    private void crearEmpleado() throws ParseException, IOException{
         String nombre = this.wdPrincipal.jTFNombre.getText();
         String cedula = this.wdPrincipal.jTFCedula.getText();
         String telefono = this.wdPrincipal.jTFTelefono.getText();
         String direccion = this.wdPrincipal.jTFDireccion.getText();
         String email = this.wdPrincipal.jTFCorreo.getText();
         String fNacimiento = this.wdPrincipal.jTFFechaNacimiento.getText();
+        
+        
         if(comprobarCreacion(nombre,cedula,telefono,direccion,email,fNacimiento)){
             
+          Empleado persona;
+            if(rol.equals("Monitor")){
+                System.out.print("Esta llegando");
+                  persona = new Monitor(cedula,nombre,telefono,fNacimiento,direccion,email);
+                  Conexion alFichero = new Conexion(persona,"Monitor");
+                  alFichero.Escribir();
+            }else if(rol.equals("Instructor")){
+                persona = new Instructor(cedula,nombre,telefono,fNacimiento,direccion,email);
+                  Conexion alFichero = new Conexion(persona,"Instructor");
+                  alFichero.Escribir();
+            }
+        }else {
+            this.wdPrincipal.showMsg("Datos incompletos");
         }
     }
     private boolean comprobarCreacion(String nomb, String ced, String tel, String dir, String email, String fecha){
@@ -88,7 +159,14 @@ public class Editor implements ActionListener{
             this.rol = "Monitor";
         }
         if(e.getSource()==this.wdPrincipal.jBtnCrear){
-            crearEmpleado();
+            try {
+                
+                crearEmpleado();
+            } catch (ParseException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (e.getSource() == this.wdPrincipal.jBTNBack) {
          

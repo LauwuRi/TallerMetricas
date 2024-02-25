@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.io.BufferedReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author
@@ -22,13 +16,13 @@ public abstract class Empleado {
     private String cedula;
     private String nombre;
     private String telefono;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String direccion;
     private String correo;
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+ 
 
 
-    public Empleado(String cedula, String nombre, String telefono, Date fechaNacimiento, String direccion, String correo) {
+    public Empleado(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -63,11 +57,11 @@ public abstract class Empleado {
         this.telefono = telefono;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -93,7 +87,7 @@ public abstract class Empleado {
 			cedula = almacen.readLine();
 			nombre = almacen.readLine();
 			telefono = almacen.readLine();
-			fechaNacimiento = formato.parse(almacen.readLine());
+			fechaNacimiento = almacen.readLine();
 			direccion=almacen.readLine();
 			correo=almacen.readLine();
 			
