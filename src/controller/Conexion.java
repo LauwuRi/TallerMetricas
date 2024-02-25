@@ -1,8 +1,14 @@
 package controller;
 
+import java.awt.List;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import model.Empleado;
 
 /**
@@ -18,9 +24,35 @@ public class Conexion {
     }
      void Escribir() throws IOException{
         System.out.println("Esta llegando a la conexion");
-        FileWriter archivo = new FileWriter("ficheros//"+rol+".txt",true);
+        FileWriter archivo = new FileWriter("ficheros//"+rol+".txt");
         archivo.write(persona.getCedula()+"--"+persona.getNombre()+"--"+persona.getTelefono()+"--"+
                 persona.getFechaNacimiento()+"--"+persona.getDireccion()+"--"+persona.getCorreo());
+        archivo.write("\n");
         archivo.close();
     }
+    
+    ArrayList Buscar(String cedula, String rol) throws IOException{
+        
+        BufferedReader almacen = new BufferedReader(new FileReader("ficheros//"+rol+".txt"));
+        String linea;
+        ArrayList<String> datos = new ArrayList<>();
+
+        while ((linea = almacen.readLine()) != null) {
+            
+            if(linea.contains(cedula)){
+                String[] partes = linea.split("--");
+                for(int i=0; i< 6; i++){
+                    datos.add(partes[i]);
+                }
+           }else{
+                datos.add(null);
+           }
+        }
+        return datos;
+    }
+    
+    void Borrar(String cedula, String rol) throws IOException{
+
+    }
+    
 }

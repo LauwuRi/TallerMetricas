@@ -80,22 +80,4 @@ public abstract class Empleado {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-    public Empleado cargar(BufferedReader almacen) {
-                
-		try {
-			cedula = almacen.readLine();
-			nombre = almacen.readLine();
-			telefono = almacen.readLine();
-			fechaNacimiento = almacen.readLine();
-			direccion=almacen.readLine();
-			correo=almacen.readLine();
-			
-			return new Empleado(cedula,nombre,telefono,fechaNacimiento,direccion,correo) {};// Se retorna un nueo objeto como un constructor
-		} catch (Exception e) {
-
-		}
-		return null;
-    }
-    
 }
