@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.VentanaInicial;
@@ -30,6 +31,8 @@ public class Editor implements ActionListener{
     private VentanaInicial wdInicial;
     private VentanaPrincipal wdPrincipal;
     private String rol;
+    
+    
     public Editor(VentanaInicial ventana, VentanaPrincipal ventanaDatos) {
         this.wdInicial = ventana;
         this.wdPrincipal = ventanaDatos;
@@ -120,9 +123,11 @@ public class Editor implements ActionListener{
         String fNacimiento = this.wdPrincipal.jTFFechaNacimiento.getText();
         
         
-        if(comprobarCreacion(nombre,cedula,telefono,direccion,email,fNacimiento)){
-            
-          Empleado persona;
+        if(comprobarCreacion(nombre,cedula,telefono,direccion,email,fNacimiento)){  
+            Empleado persona;
+            /*if(leerEmpleado(cedula)){
+                
+            }*/
             if(rol.equals("Monitor")){
                 System.out.print("Esta llegando");
                   persona = new Monitor(cedula,nombre,telefono,fNacimiento,direccion,email);
@@ -143,7 +148,75 @@ public class Editor implements ActionListener{
         aux=!aux;
         return aux;
     }
-     public void actionPerformed(ActionEvent e) {
+    
+    // Metodo que limpia los campos de texto que el usuario ingresa
+    public void LimpiarCampos() {
+	wdPrincipal.jTFNombre.setText("");
+	wdPrincipal.jTFCedula.setText("");
+	wdPrincipal.jTFTelefono.setText("");
+	wdPrincipal.jTFCorreo.setText("");
+	wdPrincipal.jTFDireccion.setText("");
+	wdPrincipal.jTFFechaNacimiento.setText("");
+
+	}
+    public void pasarDatos(ArrayList datos) {
+        Object[] personaEnLaTabla = new Object[6];
+        personaEnLaTabla[0] = datos.get(0);
+        personaEnLaTabla[1] = datos.get(1);
+        personaEnLaTabla[2] = datos.get(2);
+        personaEnLaTabla[3] = datos.get(3);
+        personaEnLaTabla[4] = datos.get(4);
+        personaEnLaTabla[5] = datos.get(5);
+        this.wdPrincipal.actualizarTabla(personaEnLaTabla);
+
+    }
+
+    private void leerEmpleado() throws ParseException, IOException{
+        
+        String cedula = this.wdPrincipal.jTFCedula.getText();
+        Empleado persona;
+        
+        if(rol.equals("Monitor")){
+                persona = new Monitor(cedula);
+                Conexion alFichero = new Conexion(persona,"Monitor");
+                ArrayList<String[]> datos = new ArrayList<>();
+                datos = alFichero.Buscar(cedula, rol);
+                if(datos.get(0) == null){
+                    wdPrincipal.showMsg("No existe el empleado");
+                }else{
+                    pasarDatos(datos);
+                    
+                }
+        }else if(rol.equals("Instructor")){
+            persona = new Instructor(cedula);
+            Conexion alFichero = new Conexion(persona,"Instructor");
+            ArrayList<String[]> datos = new ArrayList<>();
+                datos = alFichero.Buscar(cedula, rol);
+                if(datos.get(0) == null){
+                    wdPrincipal.showMsg("No existe el empleado");
+                }else{
+                    pasarDatos(datos);
+                }  
+        }
+       
+    }
+    
+    private void borrarEmpleado() throws ParseException, IOException{
+        String cedula = this.wdPrincipal.jTFCedula.getText();
+        Empleado persona;
+        if(rol.equals("Monitor")){
+            persona = new Monitor(cedula);
+            Conexion alFichero = new Conexion(persona,"Monitor");
+            alFichero.Borrar(cedula, rol);
+
+        }else if(rol.equals("Instructor")){
+            persona = new Instructor(cedula);
+            Conexion alFichero = new Conexion(persona,"Instructor");
+            alFichero.Borrar(cedula, rol);
+        }
+    }
+  
+    public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.wdInicial.jBTNInstructor) {
             this.wdInicial.setVisible(false);
             this.wdPrincipal.setVisible(true);
@@ -159,22 +232,39 @@ public class Editor implements ActionListener{
             this.rol = "Monitor";
         }
         if(e.getSource()==this.wdPrincipal.jBtnCrear){
-            try {
-                
+            try { 
                 crearEmpleado();
             } catch (ParseException ex) {
                 Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
+            LimpiarCampos();
         }
         if (e.getSource() == this.wdPrincipal.jBTNBack) {
          
            wdPrincipal.setVisible(false);
-            wdInicial.setVisible(true);
+           wdInicial.setVisible(true);
 
         }
-       
-       
+        if (e.getSource()== this.wdPrincipal.jbtnBuscar){
+            try {
+                leerEmpleado();
+            } catch (ParseException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (e.getSource() == this.wdPrincipal.jbtnEliminar){
+            try {
+                borrarEmpleado();
+            } catch (ParseException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
+    
 }

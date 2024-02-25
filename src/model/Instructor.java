@@ -16,5 +16,7 @@ public class Instructor extends Empleado{
     }
     public Instructor(){
     }
+    public Instructor(String cedula){
     
+    } 
 }

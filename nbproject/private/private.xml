@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/controller/Editor.java</file>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/main/TallerMetricas.java</file>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/model/Monitor.java</file>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/view/Interfaz.java</file>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/model/Empleado.java</file>
-            <file>file:/C:/Users/david/OneDrive/Documentos/NetBeansProjects/TallerMetricas/src/model/Instructor.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/controller/Editor.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/controller/Conexion.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/controller/Main.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/view/VentanaInicial.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/model/Empleado.java</file>
+            <file>file:/C:/Users/lain-/Documents/GitHub/TallerMetricas/src/view/VentanaPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

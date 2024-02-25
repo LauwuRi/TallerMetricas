@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author
@@ -12,9 +13,11 @@ import javax.swing.JOptionPane;
  * 
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-public VentanaPrincipal(){
-    initComponents();
-}
+    public VentanaPrincipal(){
+        initComponents();
+
+    }
+    DefaultTableModel tabla;
 
     /**
      * Creates new form Interfaz
@@ -110,6 +113,9 @@ public VentanaPrincipal(){
         jPBackground.add(jTFCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 690, 160, -1));
         jPBackground.add(jTFTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 580, 160, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+
         jTInstructores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -191,6 +197,7 @@ public VentanaPrincipal(){
      public void showMsg(String msj) {
         JOptionPane.showMessageDialog(null, msj);
     }
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBTNBack;
@@ -217,4 +224,16 @@ public VentanaPrincipal(){
     public javax.swing.JButton jbtnModificar;
     // End of variables declaration//GEN-END:variables
    
+    public void actualizarTabla(Object[] instructor) {
+        tabla = (DefaultTableModel) jTInstructores.getModel();
+        tabla.addRow(instructor);
+        jTInstructores.setModel(tabla);
+    }
+    public void limpiarTabla() {
+        int fila = jTInstructores.getRowCount();
+        for (int i = fila - 1; i >= 0; i--) {
+            tabla.removeRow(i);
+            jTInstructores.setModel(tabla);
+        }
+    }
 }

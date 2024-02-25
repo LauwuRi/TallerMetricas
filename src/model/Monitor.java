@@ -17,5 +17,8 @@ public class Monitor extends Empleado{
     }
     public Monitor(){
     
+    }
+    public Monitor(String cedula){
+    
     }    
 }
