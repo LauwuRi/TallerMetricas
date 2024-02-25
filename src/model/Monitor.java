@@ -20,5 +20,7 @@ public class Monitor extends Empleado{
     public Monitor(String cedula, String nombre, String telefono, Date fechaNacimiento, String direccion, String correo) {
         super(cedula, nombre, telefono, fechaNacimiento, direccion, correo);
     }
+    public Monitor(){
     
+    }    
 }

@@ -20,5 +20,7 @@ public class Instructor extends Empleado{
     public Instructor(String cedula, String nombre, String telefono, Date fechaNacimiento, String direccion, String correo) {
         super(cedula, nombre, telefono, fechaNacimiento, direccion, correo);
     }
+    public Instructor(){
+    }
     
 }
