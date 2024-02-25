@@ -18,7 +18,7 @@ public class Conexion {
     }
      void Escribir() throws IOException{
         System.out.println("Esta llegando a la conexion");
-        FileWriter archivo = new FileWriter("ficheros//"+rol+".txt");
+        FileWriter archivo = new FileWriter("ficheros//"+rol+".txt",true);
         archivo.write(persona.getCedula()+"--"+persona.getNombre()+"--"+persona.getTelefono()+"--"+
                 persona.getFechaNacimiento()+"--"+persona.getDireccion()+"--"+persona.getCorreo());
         archivo.close();
