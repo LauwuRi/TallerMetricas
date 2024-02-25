@@ -11,7 +11,7 @@ import java.io.BufferedReader;
  * @version 1.0 23/02/2024
  * 
  */
-public abstract class Empleado {
+public class Empleado {
     
     private String cedula;
     private String nombre;
