@@ -4,10 +4,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Clase con una interfaz grafica principalmente autogenerada
  * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
  * Camilo Tuso Mozo
  *
- * @version 1.0 23/02/2024
+ * @version 2.0 25/02/2024
  *
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -118,7 +119,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Telefono", "F. Nacimiento", "Direccion", "Correo"
+                "Cedula", "Nombre", "Telefono", "F. Nacimiento", "Direccion", "Correo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -220,17 +221,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton jbtnModificar;
     // End of variables declaration//GEN-END:variables
 
+    //Metodo que permite actualizar la tabla
     public void actualizarTabla(Object[] instructor) {
         tabla = (DefaultTableModel) jTInstructores.getModel();
         tabla.addRow(instructor);
         jTInstructores.setModel(tabla);
     }
 
-    public void limpiarTabla() {
-        int fila = jTInstructores.getRowCount();
-        for (int i = fila - 1; i >= 0; i--) {
-            tabla.removeRow(i);
-            jTInstructores.setModel(tabla);
-        }
-    }
 }

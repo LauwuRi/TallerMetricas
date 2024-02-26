@@ -1,16 +1,17 @@
 package model;
 
-import java.io.BufferedReader;
 
 /**
+ * Clase empleado, la cual define los atributos los roles
  * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
  * Camilo Tuso Mozo
  *
- * @version 1.0 23/02/2024
+ * @version 2.0 25/02/2024
  *
  */
 public class Empleado {
 
+    //Atributos de un empleado
     private String cedula;
     private String nombre;
     private String telefono;
@@ -18,6 +19,7 @@ public class Empleado {
     private String direccion;
     private String correo;
 
+    //Constructor de un empleado, sus datos
     public Empleado(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -27,9 +29,11 @@ public class Empleado {
         this.correo = correo;
     }
 
+    //Constructor vacio
     public Empleado() {
     }
 
+    //Metodos getters y setters de cada uno de los atributos
     public String getCedula() {
         return cedula;
     }

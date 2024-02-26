@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/view/VentanaPrincipal.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/model/Instructor.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/controller/Main.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/controller/Editor.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/controller/Conexion.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/model/Monitor.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/view/VentanaInicial.java</file>
-            <file>file:/D:/Trabajo/Programas/TallerMetricas-master/src/model/Empleado.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/model/Empleado.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/controller/Conexion.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/model/Instructor.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/controller/Main.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/controller/Editor.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/view/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/model/Monitor.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/UD/9no%20Semestre/Patrones/TallerMetricas/src/view/VentanaInicial.java</file>
         </group>
     </open-files>
 </project-private>

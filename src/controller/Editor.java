@@ -18,24 +18,37 @@ import model.Instructor;
 import model.Monitor;
 
 /**
+ * Clase encargada de controlar el funcionamiento de los elementos de la vista
+ *
  * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
  * Camilo Tuso Mozo
  *
- * @version 1.0 23/02/2024
+ * @version 2.0 25/02/2024
  *
  */
 public class Editor implements ActionListener {
 
+    //Se crean instancias de las dos ventanas del programa
     private VentanaInicial wdInicial;
     private VentanaPrincipal wdPrincipal;
     private String rol;
 
+    /**
+     * //Metodo constructor de la clase Editor
+     *
+     * @param ventana es un objeto que presenta toda la interfaz inicial
+     * @param ventanaDatos es un objeto que presenta toda la interfaz principal
+     */
     public Editor(VentanaInicial ventana, VentanaPrincipal ventanaDatos) {
         this.wdInicial = ventana;
         this.wdPrincipal = ventanaDatos;
         inicializadorBotones();
     }
 
+    /**
+     * Metodo que inicializa los listeners de los botones y de los campos de
+     * texto
+     */
     private void inicializadorBotones() {
         this.wdInicial.jBTNInstructor.addActionListener((ActionListener) this);
         this.wdInicial.jBTNMonitor.addActionListener((ActionListener) this);
@@ -107,6 +120,10 @@ public class Editor implements ActionListener {
 
     }
 
+    /**
+     * Metodo que crear el empleado con base en los campos de texto de la
+     * ventanaPrincipal
+     */
     private void crearEmpleado() throws ParseException, IOException {
         String nombre = this.wdPrincipal.jTFNombre.getText();
         String cedula = this.wdPrincipal.jTFCedula.getText();
@@ -135,6 +152,19 @@ public class Editor implements ActionListener {
         }
     }
 
+    /**
+     * Metodo que comprueba que los datos no esten vacios a la hora de crear el
+     * empleado
+     *
+     * @param nomb string que contiene el nombre de un empleado
+     * @param ced string que contiene la cedula de un empleado
+     * @param tel string que contiene el telefono de un empleado
+     * @param dir string que contiene el direccion de un empleado
+     * @param tel string que contiene el email de un empleado
+     * @param tel string que contiene el fecha de un empleado
+     * @return aux un booleano para comprobar la veracidad de la creacion
+     */
+
     private boolean comprobarCreacion(String nomb, String ced, String tel, String dir, String email, String fecha) {
         boolean aux = (nomb.equals("") || tel.equals("") || dir.equals("")
                 || fecha.equals("") || email.equals("") || ced.equals(""));
@@ -153,6 +183,11 @@ public class Editor implements ActionListener {
 
     }
 
+    /**
+     * Metodo que pasa los datos de un ArrayList a un objeto tabla de la
+     * interfaz
+     * @param datos string que contiene un arreglo con los datos de una persona
+     */
     public void pasarDatos(ArrayList datos) {
         Object[] personaEnLaTabla = new Object[6];
         personaEnLaTabla[0] = datos.get(0);
@@ -164,6 +199,12 @@ public class Editor implements ActionListener {
         this.wdPrincipal.actualizarTabla(personaEnLaTabla);
     }
 
+    //Metodo que pasa los datos de un empleado de un arrayList a una Tabla
+    /**
+     * 
+     * @param datos contiene un arreglo de objetos empleado
+     */
+   
     public void listarTodo(ArrayList<Empleado> datos) {
         for (int i = 0; i < datos.size(); i++) {
             Object[] personaEnLaTabla = new Object[6];
@@ -177,6 +218,7 @@ public class Editor implements ActionListener {
         }
     }
 
+    //Metodo que obtiene los datos de un empleado del fichero
     private void leerEmpleado() throws ParseException, IOException {
 
         String cedula = this.wdPrincipal.jTFCedula.getText();
@@ -206,6 +248,7 @@ public class Editor implements ActionListener {
         }
 
     }
+    //Metodo que obtiene los datos de todos los empleados de un rol del fichero
 
     private void listarEmpleados() throws ParseException, IOException {
 
@@ -219,6 +262,7 @@ public class Editor implements ActionListener {
         }
     }
 
+    //Metodo encargado de borrar un empleado con base en su cedula
     private void borrarEmpleado() throws ParseException, IOException {
         String cedula = this.wdPrincipal.jTFCedula.getText();
         Empleado persona;
@@ -234,6 +278,7 @@ public class Editor implements ActionListener {
         }
     }
 
+    //Metodo que obtiene datos de la vista y los manda a actualizar a la clase conexion
     private void actualizarEmpleado() throws ParseException, IOException {
         String cedula = this.wdPrincipal.jTFCedula.getText();
         String nombre = this.wdPrincipal.jTFNombre.getText();
@@ -254,6 +299,7 @@ public class Editor implements ActionListener {
         }
     }
 
+    //Metodo encargado de cambiar las ventanas segun acciones generados por el usuario
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.wdInicial.jBTNInstructor) {
             this.wdInicial.setVisible(false);

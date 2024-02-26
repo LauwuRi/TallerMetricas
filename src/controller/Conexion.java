@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import model.Empleado;
 
 /**
+ * Clase encargada de otorgar funciones CRUD para guardar informacion en
+ * ficheros
+ *
  * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
  * Camilo Tuso Mozo
  *
- * @version 1.0 23/02/2024
+ * @version 2.0 25/02/2024
  *
  */
 public class Conexion {
@@ -20,15 +23,25 @@ public class Conexion {
     Empleado persona;
     String rol;
 
+    /**
+     * @param persona es un objeto tipo Empleado que viene con sus atributos
+     * @param rol es un string que puede ser Monitor o Instructor
+     */
     Conexion(Empleado persona, String rol) {
         this.persona = persona;
         this.rol = rol;
     }
 
+    /**
+     * @param monitor es un string que puede ser Monitor o Instructor
+     */
     Conexion(String monitor) {
         this.rol = rol;
     }
 
+    /**
+     * Metodo encargado de escribir en un fichero los datos de un empleado
+     */
     void Escribir() throws IOException {
         System.out.println("Esta llegando a la conexion");
         FileWriter archivo = new FileWriter("ficheros//" + rol + ".txt", true);
@@ -38,6 +51,13 @@ public class Conexion {
         archivo.close();
     }
 
+    /**
+     * Metodo encargado de buscar los datos de una persona con su cedula
+     *
+     * @param cedula es un string que contiene la identificacion del empleado
+     * @param rol es un string que puede ser Monitor o Instructor
+     * @return Arraylist con los datos de una persona
+     */
     ArrayList Buscar(String cedula, String rol) throws IOException {
 
         BufferedReader almacen = new BufferedReader(new FileReader("ficheros//" + rol + ".txt"));
@@ -58,6 +78,13 @@ public class Conexion {
         return datos;
     }
 
+    /**
+     * Metodo encargado de buscar y borrar los datos de una persona a partir su
+     * cedula
+     *
+     * @param cedula es un string que contiene la identificacion del empleado
+     * @param rol es un string que puede ser Monitor o Instructor
+     */
     void Borrar(String cedula, String rol) throws IOException {
 
         ArrayList<Empleado> persona = new ArrayList<Empleado>();
@@ -91,6 +118,13 @@ public class Conexion {
         archivo.close();
     }
 
+    /**
+     * Metodo encargado de encontrar y guardar todos los datos de un rol en un
+     * fichero
+     *
+     * @param rol es un string que puede ser Monitor o Instructor
+     * @return Arraylist de objetos persona
+     */
     ArrayList Listar(String rol) throws IOException {
 
         ArrayList<Empleado> persona = new ArrayList<Empleado>();
@@ -106,6 +140,20 @@ public class Conexion {
         return persona;
     }
 
+    /**
+     * Metodo encargado de actualizar los datos en un fichero revisando que
+     * campo de texto necesita un cambio
+     *
+     *
+     * @param cedula es un string que contiene la identificacion del empleado
+     * @param nombre es un string que puede contener el nombre del empleado
+     * @param telefono es un string que puede contener el telefono del empleado
+     * @param fechaNacimiento es un string que puede conetener la fecha de
+     * nacimiento del empleado
+     * @param direccion es un string que puede contener la direccion del
+     * empleado
+     * @param correo es un string que puede contener el correo del empleado
+     */
     void Actualizar(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) throws IOException {
 
         ArrayList<Empleado> persona = new ArrayList<Empleado>();
