@@ -3,24 +3,20 @@ package model;
 import java.io.BufferedReader;
 
 /**
- * @author
- ** Miguel Angel Naranjo Joya
- ** Laura Andrea Riobueno Rincon
- ** Cristian Camilo Tuso Mozo
- * 
+ * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
+ * Camilo Tuso Mozo
+ *
  * @version 1.0 23/02/2024
- * 
+ *
  */
 public class Empleado {
-    
+
     private String cedula;
     private String nombre;
     private String telefono;
     private String fechaNacimiento;
     private String direccion;
     private String correo;
- 
-
 
     public Empleado(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) {
         this.cedula = cedula;
@@ -30,7 +26,8 @@ public class Empleado {
         this.direccion = direccion;
         this.correo = correo;
     }
-    public Empleado(){
+
+    public Empleado() {
     }
 
     public String getCedula() {

@@ -4,16 +4,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author
- ** Miguel Angel Naranjo Joya
- ** Laura Andrea Riobueno Rincon
- ** Cristian Camilo Tuso Mozo
- * 
+ * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
+ * Camilo Tuso Mozo
+ *
  * @version 1.0 23/02/2024
- * 
+ *
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    public VentanaPrincipal(){
+
+    public VentanaPrincipal() {
         initComponents();
 
     }
@@ -22,8 +21,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Interfaz
      */
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,15 +186,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jTFCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFCedulaActionPerformed
-                 
+
     /**
      * @param args the command line arguments
      */
-   
-     public void showMsg(String msj) {
+    public void showMsg(String msj) {
         JOptionPane.showMessageDialog(null, msj);
     }
-     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBTNBack;
@@ -223,12 +219,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton jbtnEliminar;
     public javax.swing.JButton jbtnModificar;
     // End of variables declaration//GEN-END:variables
-   
+
     public void actualizarTabla(Object[] instructor) {
         tabla = (DefaultTableModel) jTInstructores.getModel();
         tabla.addRow(instructor);
         jTInstructores.setModel(tabla);
     }
+
     public void limpiarTabla() {
         int fila = jTInstructores.getRowCount();
         for (int i = fila - 1; i >= 0; i--) {

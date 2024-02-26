@@ -4,13 +4,11 @@ import view.VentanaInicial;
 import view.VentanaPrincipal;
 
 /**
- * @author
- ** Miguel Angel Naranjo Joya
- ** Laura Andrea Riobueno Rincon
- ** Cristian Camilo Tuso Mozo
- * 
+ * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
+ * Camilo Tuso Mozo
+ *
  * @version 1.0 23/02/2024
- * 
+ *
  */
 public class Main {
 
@@ -22,7 +20,7 @@ public class Main {
         inicial.setVisible(true);
         VentanaPrincipal principal = new VentanaPrincipal();
         principal.setVisible(false);
-        Editor control = new Editor(inicial,principal);
+        Editor control = new Editor(inicial, principal);
     }
-    
+
 }

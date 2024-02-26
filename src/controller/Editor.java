@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import view.VentanaInicial;
 import view.VentanaPrincipal;
 import model.Empleado;
@@ -17,22 +18,18 @@ import model.Instructor;
 import model.Monitor;
 
 /**
- * @author
- ** Miguel Angel Naranjo Joya
- ** Laura Andrea Riobueno Rincon
- ** Cristian Camilo Tuso Mozo
- * 
+ * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
+ * Camilo Tuso Mozo
+ *
  * @version 1.0 23/02/2024
- * 
+ *
  */
-public class Editor implements ActionListener{
-    
+public class Editor implements ActionListener {
 
     private VentanaInicial wdInicial;
     private VentanaPrincipal wdPrincipal;
     private String rol;
-    
-    
+
     public Editor(VentanaInicial ventana, VentanaPrincipal ventanaDatos) {
         this.wdInicial = ventana;
         this.wdPrincipal = ventanaDatos;
@@ -50,115 +47,112 @@ public class Editor implements ActionListener{
         this.wdPrincipal.jBTNBack.addActionListener((ActionListener) this);
         this.wdPrincipal.jBTNMostrar.addActionListener((ActionListener) this);
         this.wdPrincipal.jTFNombre.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-				char d;
-				d = Character.toLowerCase(c);
-				if ((d < 'a' || d > 'z')) {
-					if (d == ' ') {// Se consume sino son letras
-					} else {
-						e.consume();
-					}
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                char d;
+                d = Character.toLowerCase(c);
+                if ((d < 'a' || d > 'z')) {
+                    if (d == ' ') {// Se consume sino son letras
+                    } else {
+                        e.consume();
+                    }
 
-				}
+                }
 
-			}
-		});
+            }
+        });
         this.wdPrincipal.jTFTelefono.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-				
-				if ((c < '0' || c > '9')) {// Se consume sino son números
-					e.consume();
-				} else {
-					if (wdPrincipal.jTFTelefono.getText().length() > 9) {// Se limita el numero de caracteres
-						e.consume();
-					}
-				}
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
 
+                if ((c < '0' || c > '9')) {// Se consume sino son números
+                    e.consume();
+                } else {
+                    if (wdPrincipal.jTFTelefono.getText().length() > 9) {// Se limita el numero de caracteres
+                        e.consume();
+                    }
+                }
 
-			}
-		}
-        
+            }
+        }
         );
-         this.wdPrincipal.jTFCedula.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-				
-				if ((c < '0' || c > '9')) {// Se consume sino son números
-					e.consume();
-				} else {
-					if (wdPrincipal.jTFCedula.getText().length() > 9) {// Se limita el numero de caracteres
-						e.consume();
-					}
-				}
+        this.wdPrincipal.jTFCedula.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
 
+                if ((c < '0' || c > '9')) {// Se consume sino son números
+                    e.consume();
+                } else {
+                    if (wdPrincipal.jTFCedula.getText().length() > 9) {// Se limita el numero de caracteres
+                        e.consume();
+                    }
+                }
 
-			}
-		});
-          this.wdPrincipal.jTFFechaNacimiento.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-				
-				if ((c < '0' || c > '9')&&(c!='/')) {// Se consume sino son números o /
-					e.consume();
-				} else {
-					if (wdPrincipal.jTFFechaNacimiento.getText().length() > 9) {// Se limita el numero de caracteres
-						e.consume();
-					}
-				}
+            }
+        });
+        this.wdPrincipal.jTFFechaNacimiento.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
 
+                if ((c < '0' || c > '9') && (c != '/')) {// Se consume sino son números o /
+                    e.consume();
+                } else {
+                    if (wdPrincipal.jTFFechaNacimiento.getText().length() > 9) {// Se limita el numero de caracteres
+                        e.consume();
+                    }
+                }
 
-			}
-		});
-        
+            }
+        });
+
     }
-    
-    private void crearEmpleado() throws ParseException, IOException{
+
+    private void crearEmpleado() throws ParseException, IOException {
         String nombre = this.wdPrincipal.jTFNombre.getText();
         String cedula = this.wdPrincipal.jTFCedula.getText();
         String telefono = this.wdPrincipal.jTFTelefono.getText();
         String direccion = this.wdPrincipal.jTFDireccion.getText();
         String email = this.wdPrincipal.jTFCorreo.getText();
         String fNacimiento = this.wdPrincipal.jTFFechaNacimiento.getText();
-        
-        
-        if(comprobarCreacion(nombre,cedula,telefono,direccion,email,fNacimiento)){  
+
+        if (comprobarCreacion(nombre, cedula, telefono, direccion, email, fNacimiento)) {
             Empleado persona;
             /*if(leerEmpleado(cedula)){
                 
             }*/
-            if(rol.equals("Monitor")){
+            if (rol.equals("Monitor")) {
                 System.out.print("Esta llegando");
-                  persona = new Monitor(cedula,nombre,telefono,fNacimiento,direccion,email);
-                  Conexion alFichero = new Conexion(persona,"Monitor");
-                  alFichero.Escribir();
-            }else if(rol.equals("Instructor")){
-                persona = new Instructor(cedula,nombre,telefono,fNacimiento,direccion,email);
-                  Conexion alFichero = new Conexion(persona,"Instructor");
-                  alFichero.Escribir();
+                persona = new Monitor(cedula, nombre, telefono, fNacimiento, direccion, email);
+                Conexion alFichero = new Conexion(persona, "Monitor");
+                alFichero.Escribir();
+            } else if (rol.equals("Instructor")) {
+                persona = new Instructor(cedula, nombre, telefono, fNacimiento, direccion, email);
+                Conexion alFichero = new Conexion(persona, "Instructor");
+                alFichero.Escribir();
             }
-        }else {
+        } else {
             this.wdPrincipal.showMsg("Datos incompletos");
         }
     }
-    private boolean comprobarCreacion(String nomb, String ced, String tel, String dir, String email, String fecha){
-        boolean aux=(nomb.equals("") || tel.equals("") || dir.equals("")
-                || fecha.equals("") || email.equals("")||ced.equals(""));
-        aux=!aux;
+
+    private boolean comprobarCreacion(String nomb, String ced, String tel, String dir, String email, String fecha) {
+        boolean aux = (nomb.equals("") || tel.equals("") || dir.equals("")
+                || fecha.equals("") || email.equals("") || ced.equals(""));
+        aux = !aux;
         return aux;
     }
-    
+
     // Metodo que limpia los campos de texto que el usuario ingresa
     public void LimpiarCampos() {
-	wdPrincipal.jTFNombre.setText("");
-	wdPrincipal.jTFCedula.setText("");
-	wdPrincipal.jTFTelefono.setText("");
-	wdPrincipal.jTFCorreo.setText("");
-	wdPrincipal.jTFDireccion.setText("");
-	wdPrincipal.jTFFechaNacimiento.setText("");
+        wdPrincipal.jTFNombre.setText("");
+        wdPrincipal.jTFCedula.setText("");
+        wdPrincipal.jTFTelefono.setText("");
+        wdPrincipal.jTFCorreo.setText("");
+        wdPrincipal.jTFDireccion.setText("");
+        wdPrincipal.jTFFechaNacimiento.setText("");
 
-	}
+    }
+
     public void pasarDatos(ArrayList datos) {
         Object[] personaEnLaTabla = new Object[6];
         personaEnLaTabla[0] = datos.get(0);
@@ -168,54 +162,98 @@ public class Editor implements ActionListener{
         personaEnLaTabla[4] = datos.get(4);
         personaEnLaTabla[5] = datos.get(5);
         this.wdPrincipal.actualizarTabla(personaEnLaTabla);
-
     }
 
-    private void leerEmpleado() throws ParseException, IOException{
-        
-        String cedula = this.wdPrincipal.jTFCedula.getText();
-        Empleado persona;
-        
-        if(rol.equals("Monitor")){
-                persona = new Monitor(cedula);
-                Conexion alFichero = new Conexion(persona,"Monitor");
-                ArrayList<String[]> datos = new ArrayList<>();
-                datos = alFichero.Buscar(cedula, rol);
-                if(datos.get(0) == null){
-                    wdPrincipal.showMsg("No existe el empleado");
-                }else{
-                    pasarDatos(datos);
-                    
-                }
-        }else if(rol.equals("Instructor")){
-            persona = new Instructor(cedula);
-            Conexion alFichero = new Conexion(persona,"Instructor");
-            ArrayList<String[]> datos = new ArrayList<>();
-                datos = alFichero.Buscar(cedula, rol);
-                if(datos.get(0) == null){
-                    wdPrincipal.showMsg("No existe el empleado");
-                }else{
-                    pasarDatos(datos);
-                }  
+    public void listarTodo(ArrayList<Empleado> datos) {
+        for (int i = 0; i < datos.size(); i++) {
+            Object[] personaEnLaTabla = new Object[6];
+            personaEnLaTabla[0] = datos.get(i).getCedula();
+            personaEnLaTabla[1] = datos.get(i).getNombre();
+            personaEnLaTabla[2] = datos.get(i).getTelefono();
+            personaEnLaTabla[3] = datos.get(i).getFechaNacimiento();
+            personaEnLaTabla[4] = datos.get(i).getDireccion();
+            personaEnLaTabla[5] = datos.get(i).getCorreo();
+            this.wdPrincipal.actualizarTabla(personaEnLaTabla);
         }
-       
     }
-    
-    private void borrarEmpleado() throws ParseException, IOException{
+
+    private void leerEmpleado() throws ParseException, IOException {
+
         String cedula = this.wdPrincipal.jTFCedula.getText();
         Empleado persona;
-        if(rol.equals("Monitor")){
+
+        if (rol.equals("Monitor")) {
             persona = new Monitor(cedula);
-            Conexion alFichero = new Conexion(persona,"Monitor");
+            Conexion alFichero = new Conexion(persona, "Monitor");
+            ArrayList<String[]> datos = new ArrayList<>();
+            datos = alFichero.Buscar(cedula, rol);
+            if (datos.get(0) == null) {
+                wdPrincipal.showMsg("No existe el empleado");
+            } else {
+                pasarDatos(datos);
+
+            }
+        } else if (rol.equals("Instructor")) {
+            persona = new Instructor(cedula);
+            Conexion alFichero = new Conexion(persona, "Instructor");
+            ArrayList<String[]> datos = new ArrayList<>();
+            datos = alFichero.Buscar(cedula, rol);
+            if (datos.get(0) == null) {
+                wdPrincipal.showMsg("No existe el empleado");
+            } else {
+                pasarDatos(datos);
+            }
+        }
+
+    }
+
+    private void listarEmpleados() throws ParseException, IOException {
+
+        Conexion alFichero = new Conexion("Monitor");
+        ArrayList<Empleado> datos = new ArrayList<>();
+        datos = alFichero.Listar(rol);
+        if (datos.get(0) == null) {
+            wdPrincipal.showMsg("No existe el empleado");
+        } else {
+            listarTodo(datos);
+        }
+    }
+
+    private void borrarEmpleado() throws ParseException, IOException {
+        String cedula = this.wdPrincipal.jTFCedula.getText();
+        Empleado persona;
+        if (rol.equals("Monitor")) {
+            persona = new Monitor(cedula);
+            Conexion alFichero = new Conexion(persona, "Monitor");
             alFichero.Borrar(cedula, rol);
 
-        }else if(rol.equals("Instructor")){
+        } else if (rol.equals("Instructor")) {
             persona = new Instructor(cedula);
-            Conexion alFichero = new Conexion(persona,"Instructor");
+            Conexion alFichero = new Conexion(persona, "Instructor");
             alFichero.Borrar(cedula, rol);
         }
     }
-  
+
+    private void actualizarEmpleado() throws ParseException, IOException {
+        String cedula = this.wdPrincipal.jTFCedula.getText();
+        String nombre = this.wdPrincipal.jTFNombre.getText();
+        String telefono = this.wdPrincipal.jTFTelefono.getText();
+        String direccion = this.wdPrincipal.jTFDireccion.getText();
+        String email = this.wdPrincipal.jTFCorreo.getText();
+        String fNacimiento = this.wdPrincipal.jTFFechaNacimiento.getText();
+        Empleado persona;
+        if (rol.equals("Monitor")) {
+            persona = new Monitor(cedula);
+            Conexion alFichero = new Conexion(persona, "Monitor");
+            alFichero.Actualizar(cedula, nombre, telefono, fNacimiento, direccion, email);
+
+        } else if (rol.equals("Instructor")) {
+            persona = new Instructor(cedula);
+            Conexion alFichero = new Conexion(persona, "Instructor");
+            alFichero.Actualizar(cedula, nombre, telefono, fNacimiento, direccion, email);
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.wdInicial.jBTNInstructor) {
             this.wdInicial.setVisible(false);
@@ -231,8 +269,8 @@ public class Editor implements ActionListener{
             this.wdPrincipal.jLTitulo.setText("Manejo datos de monitores");
             this.rol = "Monitor";
         }
-        if(e.getSource()==this.wdPrincipal.jBtnCrear){
-            try { 
+        if (e.getSource() == this.wdPrincipal.jBtnCrear) {
+            try {
                 crearEmpleado();
             } catch (ParseException ex) {
                 Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,12 +280,12 @@ public class Editor implements ActionListener{
             LimpiarCampos();
         }
         if (e.getSource() == this.wdPrincipal.jBTNBack) {
-         
-           wdPrincipal.setVisible(false);
-           wdInicial.setVisible(true);
+
+            wdPrincipal.setVisible(false);
+            wdInicial.setVisible(true);
 
         }
-        if (e.getSource()== this.wdPrincipal.jbtnBuscar){
+        if (e.getSource() == this.wdPrincipal.jbtnBuscar) {
             try {
                 leerEmpleado();
             } catch (ParseException ex) {
@@ -256,7 +294,7 @@ public class Editor implements ActionListener{
                 Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (e.getSource() == this.wdPrincipal.jbtnEliminar){
+        if (e.getSource() == this.wdPrincipal.jbtnEliminar) {
             try {
                 borrarEmpleado();
             } catch (ParseException ex) {
@@ -265,6 +303,30 @@ public class Editor implements ActionListener{
                 Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (e.getSource() == this.wdPrincipal.jbtnModificar) {
+            try {
+                actualizarEmpleado();
+            } catch (ParseException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (e.getSource() == this.wdPrincipal.jBTNMostrar) {
+            try {
+                DefaultTableModel temp = (DefaultTableModel) this.wdPrincipal.jTInstructores.getModel();
+                for (int i = 0; i < this.wdPrincipal.jTInstructores.getRowCount(); i++) {
+                    temp.removeRow(i);
+                    i -= 1;
+                }
+                listarEmpleados();
+            } catch (ParseException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
-    
+
 }

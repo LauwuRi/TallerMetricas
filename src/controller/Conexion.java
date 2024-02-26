@@ -1,23 +1,19 @@
 package controller;
 
-import java.awt.List;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import model.Empleado;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
-
 import model.Empleado;
-import model.Instructor;
-import model.Monitor;
 
 /**
+ * @author * Miguel Angel Naranjo Joya * Laura Andrea Riobueno Rincon * Cristian
+ * Camilo Tuso Mozo
  *
- * @author migue
+ * @version 1.0 23/02/2024
+ *
  */
 public class Conexion {
 
@@ -29,9 +25,13 @@ public class Conexion {
         this.rol = rol;
     }
 
+    Conexion(String monitor) {
+        this.rol = rol;
+    }
+
     void Escribir() throws IOException {
         System.out.println("Esta llegando a la conexion");
-        FileWriter archivo = new FileWriter("ficheros//" + rol + ".txt",true);
+        FileWriter archivo = new FileWriter("ficheros//" + rol + ".txt", true);
         archivo.write(persona.getCedula() + "--" + persona.getNombre() + "--" + persona.getTelefono() + "--"
                 + persona.getFechaNacimiento() + "--" + persona.getDireccion() + "--" + persona.getCorreo());
         archivo.write("\n");
@@ -59,33 +59,96 @@ public class Conexion {
     }
 
     void Borrar(String cedula, String rol) throws IOException {
-        
-    File archivo = new File("ficheros//" + rol + ".txt");
-    
- 
-    
+
         ArrayList<Empleado> persona = new ArrayList<Empleado>();
         Empleado aux;
         BufferedReader almacen = new BufferedReader(new FileReader("ficheros//" + rol + ".txt"));
         String linea;
+
         while ((linea = almacen.readLine()) != null) {
-            
             String[] partes = linea.split("--");
             aux = new Empleado(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
             persona.add(aux);
         }
+
         for (int i = 0; i < persona.size(); i++) {
-            System.out.println(cedula);
             if (persona.get(i).getCedula().equals(cedula)) {
-                System.out.println("Entra if"+persona.get(i).getCedula());
                 persona.remove(i);
             }
         }
-        
-       for (int i = 0; i < persona.size(); i++) {
-             archivo.write(persona.get(i).getCedula() + "--" + persona.get(i).getNombre() + "--" + persona.get(i).getTelefono() + "--"
-                + persona.get(i).getFechaNacimiento() + "--" + persona.get(i).getDireccion() + "--" + persona.get(i).getCorreo());
-        archivo.write("\n");
+
+        almacen.close();
+        Writer archivo = new FileWriter("ficheros//" + rol + ".txt", false);
+
+        for (int i = 0; i < persona.size(); i++) {
+
+            System.out.println(persona.get(i).getCedula());
+
+            archivo.write(persona.get(i).getCedula() + "--" + persona.get(i).getNombre() + "--" + persona.get(i).getTelefono() + "--"
+                    + persona.get(i).getFechaNacimiento() + "--" + persona.get(i).getDireccion() + "--" + persona.get(i).getCorreo());
+            archivo.write("\n");
+        }
+        archivo.close();
+    }
+
+    ArrayList Listar(String rol) throws IOException {
+
+        ArrayList<Empleado> persona = new ArrayList<Empleado>();
+        Empleado aux;
+        BufferedReader almacen = new BufferedReader(new FileReader("ficheros//" + rol + ".txt"));
+        String linea;
+
+        while ((linea = almacen.readLine()) != null) {
+            String[] partes = linea.split("--");
+            aux = new Empleado(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
+            persona.add(aux);
+        }
+        return persona;
+    }
+
+    void Actualizar(String cedula, String nombre, String telefono, String fechaNacimiento, String direccion, String correo) throws IOException {
+
+        ArrayList<Empleado> persona = new ArrayList<Empleado>();
+        Empleado aux;
+        BufferedReader almacen = new BufferedReader(new FileReader("ficheros//" + rol + ".txt"));
+        String linea;
+
+        while ((linea = almacen.readLine()) != null) {
+            String[] partes = linea.split("--");
+            aux = new Empleado(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
+            persona.add(aux);
+        }
+
+        for (int i = 0; i < persona.size(); i++) {
+            if (persona.get(i).getCedula().equals(cedula)) {
+                if (!nombre.equals("")) {
+                    persona.get(i).setNombre(nombre);
+                }
+                if (!telefono.equals("")) {
+                    persona.get(i).setTelefono(telefono);
+                }
+                if (!fechaNacimiento.equals("")) {
+                    persona.get(i).setFechaNacimiento(fechaNacimiento);
+                }
+                if (!direccion.equals("")) {
+                    persona.get(i).setDireccion(direccion);
+                }
+                if (!correo.equals("")) {
+                    persona.get(i).setCorreo(correo);
+                }
+            }
+        }
+
+        almacen.close();
+        Writer archivo = new FileWriter("ficheros//" + rol + ".txt", false);
+
+        for (int i = 0; i < persona.size(); i++) {
+
+            System.out.println(persona.get(i).getCedula());
+
+            archivo.write(persona.get(i).getCedula() + "--" + persona.get(i).getNombre() + "--" + persona.get(i).getTelefono() + "--"
+                    + persona.get(i).getFechaNacimiento() + "--" + persona.get(i).getDireccion() + "--" + persona.get(i).getCorreo());
+            archivo.write("\n");
         }
         archivo.close();
     }
